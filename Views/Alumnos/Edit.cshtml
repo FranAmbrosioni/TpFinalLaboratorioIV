@@ -1,0 +1,71 @@
+﻿@model TrabajoFinalLaboratioIV.Models.Alumno
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Alumno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscripcion" class="control-label"></label>
+                <input asp-for="Inscripcion" class="form-control" />
+                <span asp-validation-for="Inscripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="fechaNac" class="control-label"></label>
+                <input asp-for="fechaNac" class="form-control" />
+                <span asp-validation-for="fechaNac" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="actividadId" class="control-label"></label>
+                <select asp-for="actividadId" class="form-control" asp-items="ViewBag.actividadList"></select>
+                <span asp-validation-for="actividadId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="turnoId" class="control-label"></label>
+                <select asp-for="turnoId" class="form-control" asp-items="ViewBag.turnoList"></select>
+                <span asp-validation-for="turnoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="foto" value="@Model.foto" />
+                <img src="@(!string.IsNullOrEmpty(Model.foto) ? "/fotos/"+Model.foto : "")" id="imagen" class="rounded-circle" style="max-width:50px" />
+                <input type="file" name="seleccionImg" value="seleccionImg" accept="image/jpeg" />
+
+                <span asp-validation-for="foto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
